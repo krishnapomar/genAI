@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LangChain Implementation</title>
+</head>
+<body>
+    <h1>LangChain Implementation</h1>
+    
+    <label for="input">Enter your prompt:</label>
+    <input type="text" id="input" name="input">
+    <button onclick="sendInput()">Generate</button>
+    
+    <h2>Output:</h2>
+    <p id="output"></p>
+    
+    <script>
+        async function sendInput() {
+            const input = document.getElementById("input").value;
+            
+            const response = await fetch('/api/process', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ input })
+            });
+            
+            const result = await response.json();
+            
+            document.getElementById("output").textContent = result;
+        }
+    </script>
+</body>
+</html>
+
